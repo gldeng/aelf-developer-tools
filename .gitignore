@@ -2,3 +2,6 @@ temp
 
 # Rider
 .idea/
+
+# nupkg artifacts
+nupkgs/
