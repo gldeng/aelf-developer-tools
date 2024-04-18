@@ -20,7 +20,7 @@ jobs:
       - name: Download contract_patcher binary
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
-          bash scripts/d.sh
+          bash scripts/download-contract-patcher.sh
 
       - name: Read version from version.props
         run: |
