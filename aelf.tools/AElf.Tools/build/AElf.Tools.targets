@@ -42,6 +42,24 @@
                 <OutputDir>$(ObjPath)Protobuf/reference</OutputDir>
             </Protobuf>
             
+            <!-- Add the proto files in custom. -->
+            <Protobuf Include="@(PbBase)">
+                <ContractOutputOptions>nocontract</ContractOutputOptions>
+            </Protobuf>
+            <Protobuf Include="@(PbContract)"/>
+            <Protobuf Include="@(PbMessage)">
+                <ContractOutputOptions>nocontract</ContractOutputOptions>
+            </Protobuf>
+            <Protobuf Include="@(PbReference)">
+                <ContractOutputOptions>reference</ContractOutputOptions>
+                <Access>Internal</Access>
+            </Protobuf>
+            <Protobuf Include="@(PbStub)">
+                <ContractOutputOptions>stub</ContractOutputOptions>
+                <Access>Internal</Access>
+            </Protobuf>
+
+            <!-- Add the proto files in the convention directory to the compile list. -->
             <Protobuf Include="Protobuf/base/*.proto">
                 <ContractOutputOptions>nocontract</ContractOutputOptions>
             </Protobuf>
