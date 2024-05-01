@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <PackageType>Contract</PackageType>
         <PackageId>AElf.ContractTemplates</PackageId>
