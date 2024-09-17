@@ -42,18 +42,18 @@
                 <OutputDir>$(ObjPath)Protobuf/reference</OutputDir>
             </Protobuf>
             
-            <Protobuf Include="@(PbBase)">
+            <Protobuf Include="Protobuf/base/*.proto">
                 <ContractOutputOptions>nocontract</ContractOutputOptions>
             </Protobuf>
-            <Protobuf Include="@(PbContract)"/>
-            <Protobuf Include="@(PbMessage)">
+            <Protobuf Include="Protobuf/contract/*.proto"/>
+            <Protobuf Include="Protobuf/message/*.proto">
                 <ContractOutputOptions>nocontract</ContractOutputOptions>
             </Protobuf>
-            <Protobuf Include="@(PbReference)">
+            <Protobuf Include="Protobuf/reference/*.proto">
                 <ContractOutputOptions>reference</ContractOutputOptions>
                 <Access>Internal</Access>
             </Protobuf>
-            <Protobuf Include="@(PbStub)">
+            <Protobuf Include="Protobuf/stub/*.proto">
                 <ContractOutputOptions>stub</ContractOutputOptions>
                 <Access>Internal</Access>
             </Protobuf>
