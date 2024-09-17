@@ -16,7 +16,7 @@ fi
 source $config_file
 
 # Print the version number
-echo "Version: $CONTRACT_PLUGIN_VERSION"
+echo "Version: $CONTRACT_PATCHER_VERSION"
 
 # Define the array of platforms and their respective destination subfolders
 platforms=("linux-x64" "win-x64" "osx-x64" "osx-arm64")
@@ -27,7 +27,7 @@ for index in "${!platforms[@]}"
 do
     echo "Downloading: ${platforms[index]}"
     # Define the URL
-    url="https://github.com/gldeng/aelf-contract-patcher/releases/download/$CONTRACT_PLUGIN_VERSION/aelf-contract-patcher-${platforms[index]}-$CONTRACT_PLUGIN_VERSION.zip"
+    url="https://github.com/gldeng/aelf-contract-patcher/releases/download/$CONTRACT_PATCHER_VERSION/aelf-contract-patcher-${platforms[index]}-$CONTRACT_PATCHER_VERSION.zip"
 
     # Define the target directory relative to the script directory
     dir="$script_dir/../aelf.tools/AElf.Tools/tools/${subfolders[index]}"
