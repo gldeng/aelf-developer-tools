@@ -1,0 +1,44 @@
+name: Publish TestBase to preview repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      WORKING_DIRECTORY: aelf.testing.testbase
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.*'  # Change this to the .NET version you're using
+
+      - name: Read version from version.props
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/preview" ]]; then
+            version=$(grep -oP '<Version>\K[^<]+' version.props)
+            echo "VERSION=$version-preview.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          else
+            version=$(grep -oP '<Version>\K[^<]+' version.props)
+            echo "VERSION=$version" >> $GITHUB_ENV
+          fi
+
+      - name: Build project
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: dotnet build --configuration Release /p:Version=$VERSION /p:Platform="Any CPU" **/*.csproj
+
+      - name: Pack
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: dotnet pack --configuration Release --output nupkgs /p:Version=$VERSION /p:Platform="Any CPU" **/*.csproj
+
+      - name: Publish NuGet packages
+        uses: dansiegel/publish-nuget@v1.2
+        with:
+          filename: '**/*.nupkg'
+          apiKey: ${{ secrets.PREVIEW_NUGET_API_KEY }}
+          feedUrl: ${{ secrets.PREVIEW_NUGET_FEED_URL }}
