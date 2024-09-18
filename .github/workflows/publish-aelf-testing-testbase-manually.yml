@@ -28,6 +28,9 @@ jobs:
             echo "VERSION=$version" >> $GITHUB_ENV
           fi
 
+      - name: Restore dependencies
+        run: dotnet restore **/*.csproj
+
       - name: Build project
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: dotnet build --configuration Release /p:Version=$VERSION /p:Platform="Any CPU" **/*.csproj
