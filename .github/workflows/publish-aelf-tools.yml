@@ -1,7 +1,8 @@
 on:
-  push:
-    branches:
-      - preview
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - preview
 
 jobs:
   publish:
