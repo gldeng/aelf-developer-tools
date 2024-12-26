@@ -18,6 +18,11 @@ jobs:
         with:
           dotnet-version: '7.0.*'  # Change this to the .NET version you're using
 
+      - name: Install NuGet CLI
+        run: |
+          dotnet tool install --global NuGet.CommandLine
+          echo "::add-path::$(dotnet tool list --global | grep 'nuget' | awk '{print $3}')"
+
       - name: Download contract_patcher binary
         run: |
           bash scripts/download-contract-patcher.sh
