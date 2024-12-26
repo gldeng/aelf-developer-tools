@@ -20,8 +20,8 @@ jobs:
 
       - name: Install NuGet CLI
         run: |
-          dotnet tool install --global NuGet.CommandLine
-          echo "::add-path::$(dotnet tool list --global | grep 'nuget' | awk '{print $3}')"
+          sudo apt-get update
+          sudo apt-get install -y nuget
 
       - name: Download contract_patcher binary
         run: |
