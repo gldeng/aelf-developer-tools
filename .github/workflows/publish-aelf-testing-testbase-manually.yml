@@ -40,8 +40,6 @@ jobs:
         run: dotnet pack --configuration Release --output nupkgs /p:Version=$VERSION /p:Platform="Any CPU" **/*.csproj
 
       - name: Publish NuGet packages
-        uses: dansiegel/publish-nuget@v1.2
-        with:
-          filename: '**/*.nupkg'
-          apiKey: ${{ secrets.PREVIEW_NUGET_API_KEY }}
-          feedUrl: ${{ secrets.PREVIEW_NUGET_FEED_URL }}
+        run: |
+          dotnet nuget push '**/*.nupkg' --api-key ${{ secrets.PREVIEW_NUGET_API_KEY }} --source ${{ secrets.PREVIEW_NUGET_FEED_URL }}
+
