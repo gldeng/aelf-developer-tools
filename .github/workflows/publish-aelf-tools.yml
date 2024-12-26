@@ -18,11 +18,6 @@ jobs:
         with:
           dotnet-version: '7.0.*'  # Change this to the .NET version you're using
 
-      - name: Install NuGet CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y nuget
-
       - name: Download contract_patcher binary
         run: |
           bash scripts/download-contract-patcher.sh
@@ -47,8 +42,6 @@ jobs:
         run: dotnet pack --configuration Release --output nupkgs /p:Version=$VERSION /p:Platform="Any CPU"
 
       - name: Publish NuGet packages
-        uses: dansiegel/publish-nuget@v1.2
-        with:
-          filename: '**/*.nupkg'
-          apiKey: ${{ secrets.PREVIEW_NUGET_API_KEY }}
-          feedUrl: ${{ secrets.PREVIEW_NUGET_FEED_URL }}
+        run: |
+          dotnet nuget push '**/*.nupkg' --api-key ${{ secrets.PREVIEW_NUGET_API_KEY }} --source ${{ secrets.PREVIEW_NUGET_FEED_URL }}
+
