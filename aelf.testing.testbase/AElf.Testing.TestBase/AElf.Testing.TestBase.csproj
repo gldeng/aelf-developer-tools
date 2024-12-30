@@ -13,7 +13,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <AelfVersion>1.12.3.4-preview</AelfVersion>
+        <AelfVersion>1.12.3.5-preview</AelfVersion>
     </PropertyGroup>
 
     <ItemGroup>
